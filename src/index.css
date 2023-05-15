@@ -17,6 +17,7 @@
   --input-msg-color: #3B4A54;
   --chat-hover-color: #F5F6F6;
   --clicked-color: #d5d5d5;
+  --scrollbar-color: #CED0D1;
 }
 body {
   margin: 0;
@@ -42,10 +43,10 @@ body {
   background-color: var(--main-bg-color);
   width: 100%;
   height: -webkit-fill-available;
-  max-width: 1600px;
+  max-width: 1750px;
   max-height: 960px;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 20px 30px;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
 }

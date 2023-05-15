@@ -1,0 +1,10 @@
+.chat__empty {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 0 auto;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text-grey-color);
+}

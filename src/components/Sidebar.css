@@ -2,8 +2,20 @@
     display: flex;
     flex-direction: column;
     flex: 0.35;
-    max-width: 600px;
+    max-width: 550px;
     border-right: 2px solid var(--border-color);
+}
+.sidebar_chats{
+    overflow-y: scroll;
+    scrollbar-color: hsl(240, 63%, 64%) #e0e0e0;
+    scrollbar-width: thin;
+}
+.sidebar_chats::-webkit-scrollbar {
+    width: 6px;
+    background: var(--white);
+}
+.sidebar_chats::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
 }
 .sidebar_header{
     box-sizing: border-box;

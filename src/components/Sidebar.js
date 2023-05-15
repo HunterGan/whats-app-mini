@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Sidebar.css';
 import { ReactComponent as AvatarImg } from './svg/Avatar.svg';
 import { ReactComponent as CommunityImg } from './svg/Community.svg';
@@ -6,22 +7,16 @@ import { ReactComponent as ChatImg } from './svg/Chat.svg';
 import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as Search } from './svg/Search.svg';
 import SidebarChat from './SidebarChat';
+import { actions } from '../slices/index.js';
 
 const Sidebar = () => {
-  const f = 'p';
-  console.log(f);
-  const chats = [{
-    id: 1,
-    name: '900',
-    body: 'Privet',
-    timeStamp: '12.34.22',
-  },
-  {
-    id: 2,
-    name: 'Vasya',
-    body: 'i tebe privet',
-    timeStamp: '12.34.23',
-  }];
+  const dispatch = useDispatch();
+  // const setActiveChannel = (id) => () => dispatch(actions.setActiveChannel(id));
+  const handleChooseChannel = (id) => () => {
+    dispatch(actions.setActiveChannel(id));
+  };
+  console.log(!!dispatch, !!actions);
+  const { chats } = useSelector((state) => state.chatReducer);
   return (
     <div className="sidebar">
       <div className="sidebar_header">
@@ -39,15 +34,12 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sidebar_chats">
-        {chats && chats.map(({
-          id, name, body, timeStamp,
-        }) => (
+        {chats && chats.map(({ id, name }) => (
           <SidebarChat
             key={id}
             name={name}
-            body={body}
-            timeStamp={timeStamp}
             id={id}
+            action={handleChooseChannel}
           />
         ))}
       </div>

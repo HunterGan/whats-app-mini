@@ -9,6 +9,7 @@ import { ReactComponent as Clip } from './svg/Clip.svg';
 
 const Chat = () => {
   const [input, setInput] = useState('');
+  const activeChannel = 1;
   const messages = [
     {
       id: 1,
@@ -38,7 +39,7 @@ const Chat = () => {
     // setInput(' ');
   };
 
-  return (
+  return activeChannel && (
     <div className="chat">
       <div className="chat_header">
         <Avatar cursor="pointer" />
