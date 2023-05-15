@@ -75,15 +75,13 @@ const Chat = () => {
             type="text"
           />
           <button
+            className="button__icon"
             onClick={sendMessage}
             type="submit"
           >
-            Send a message
-
+            <Send />
           </button>
         </form>
-
-        <Send />
       </div>
 
     </div>

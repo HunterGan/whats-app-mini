@@ -82,10 +82,23 @@
     font-size: 15px;
     color: var(--input-msg-color);
 }
-.chat_footer>form>button{
-    display: none;
-}
-.chat_footer> svg{
+
+.chat_footer svg{
     width: 40px;
     color: var(--svg-color);
+    cursor: pointer;
+}
+
+.button__icon{
+    background-color: inherit;
+    border-radius: 50%;
+    border: 0 solid var(--main-bg-color);
+   
+}
+.chat_footer svg:hover {
+    color: var(--text-grey-color); 
+}
+
+.button__icon:active{
+    background-color: var(--clicked-color);
 }
