@@ -4,7 +4,8 @@ import { ReactComponent as Avatar } from './svg/Avatar.svg';
 import { ReactComponent as Search } from './svg/Search.svg';
 import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
-import { ReactComponent as Mic } from './svg/Mic.svg';
+import { ReactComponent as Send } from './svg/Send.svg';
+import { ReactComponent as Clip } from './svg/Clip.svg';
 
 const Chat = () => {
   const [input, setInput] = useState('');
@@ -40,7 +41,7 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat_header">
-        <Avatar />
+        <Avatar cursor="pointer" />
         <div className="chat_headerInput">
           <h3>Room name</h3>
           <p>Last seen at..</p>
@@ -64,7 +65,8 @@ const Chat = () => {
       </div>
 
       <div className="chat_footer">
-        <InsertEmoj />
+        <InsertEmoj cursor="pointer" title="dfdf" />
+        <Clip />
         <form>
           <input
             value={input}
@@ -81,7 +83,7 @@ const Chat = () => {
           </button>
         </form>
 
-        <Mic />
+        <Send />
       </div>
 
     </div>

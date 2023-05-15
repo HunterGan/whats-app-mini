@@ -3,33 +3,53 @@
   margin: 0;
   padding: 0;
 }
+:root {
+  --first-layout-bg-color: #D9E0E0;
+  --second-layout-bg-color: #00A884;
+  --main-bg-color: #f0f2f5;
+  --border-color: #4a45450a;
+  --white: #ffffff;
+  --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --svg-color: #54656f;
+  --msg-rcvd-color: #dcf8c6;
+  --text-black-color: #111B21;
+  --text-grey-color: #667781;
+  --input-msg-color: #3B4A54;
+  --chat-hover-color: #F5F6F6;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 .app {
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: white;
+  background: linear-gradient(to top,
+        var(--first-layout-bg-color) 0%,
+        var(--first-layout-bg-color) 87%,
+        var(--second-layout-bg-color) 87%,
+        var(--second-layout-bg-color) 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .app_body {
   display: flex;
-  background-color: #f0f2f5;
-  margin-top: -50px;
-  height: 90vh;
-  width: 95vw;
+  background-color: var(--main-bg-color);
+  width: 100%;
+  height: -webkit-fill-available;
+  max-width: 1600px;
+  max-height: 960px;
+  overflow: hidden;
+  margin: 20px 0;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #4a45450a;
+  border: 1px solid var(--border-color);
+}
+@media (max-width: 1600px) {
+  .app_body {
+    margin: 0;
+  }
 }

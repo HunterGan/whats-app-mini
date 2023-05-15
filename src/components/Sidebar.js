@@ -11,10 +11,16 @@ const Sidebar = () => {
   const f = 'p';
   console.log(f);
   const chats = [{
+    id: 1,
     name: '900',
+    body: 'Privet',
+    timeStamp: '12.34.22',
   },
   {
+    id: 2,
     name: 'Vasya',
+    body: 'i tebe privet',
+    timeStamp: '12.34.23',
   }];
   return (
     <div className="sidebar">
@@ -41,6 +47,7 @@ const Sidebar = () => {
             name={name}
             body={body}
             timeStamp={timeStamp}
+            id={id}
           />
         ))}
       </div>
