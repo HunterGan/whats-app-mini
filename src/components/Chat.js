@@ -6,9 +6,11 @@ import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
 import { ReactComponent as Send } from './svg/Send.svg';
 import { ReactComponent as Clip } from './svg/Clip.svg';
+/// import { useSelector } from 'react-redux';
 
 const Chat = () => {
   const [input, setInput] = useState('');
+  /// const { messages } = useSelector(state => state.messagesReducer);
   const activeChannel = 1;
   const messages = [
     {

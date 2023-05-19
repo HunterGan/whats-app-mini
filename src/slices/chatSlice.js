@@ -6,7 +6,7 @@ const initialState = { chats: [], activeChatId: null };
 export const activeChatId = null;
 
 const slice = createSlice({
-  name: 'contacts',
+  name: 'chats',
   initialState,
   reducers: {
     setInitialState(state, { payload }) {
@@ -20,6 +20,8 @@ const slice = createSlice({
     },
     setActiveChannel(state, { payload }) {
       console.log('tryuing to add, payload: ', payload);
+      const { id } = payload;
+      state.activeChatId = id;
       // const { id } = payload;
       // state.currentChannelId = id;
     },

@@ -1,7 +1,9 @@
 .chat{
     display: flex;
     flex-direction: column;
-    flex: 0.65;
+    flex: 1 1 auto;
+    max-width: 1591px;
+    width: 100%;
 }
 .chat_header{
     padding: 10px 16px;

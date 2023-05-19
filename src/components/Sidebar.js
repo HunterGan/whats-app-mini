@@ -13,10 +13,9 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   // const setActiveChannel = (id) => () => dispatch(actions.setActiveChannel(id));
   const handleChooseChannel = (id) => () => {
-    dispatch(actions.setActiveChannel(id));
+    dispatch(actions.setActiveChannel({ id }));
   };
-  console.log(!!dispatch, !!actions);
-  const { chats } = useSelector((state) => state.chatReducer);
+  const { chats, activeChatId } = useSelector((state) => state.chatReducer);
   return (
     <div className="sidebar">
       <div className="sidebar_header">
@@ -33,16 +32,17 @@ const Sidebar = () => {
           <input type="text" placeholder="Search or start new Chat" />
         </div>
       </div>
-      <div className="sidebar_chats">
+      <ul className="sidebar_chats">
         {chats && chats.map(({ id, name }) => (
           <SidebarChat
             key={id}
             name={name}
             id={id}
-            action={handleChooseChannel}
+            handleChooseChannel={handleChooseChannel(id)}
+            isActive={activeChatId === id}
           />
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

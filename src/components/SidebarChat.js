@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React from 'react';
 import './Sidebar.css';
 import { ReactComponent as Avatar } from './svg/Avatar.svg';
 
-const SidebarChat = ({ name, id, handleChooseChannel }) => {
+const SidebarChat = ({ name, handleChooseChannel, isActive }) => {
   const userAvatar = null;
-
-  const { activeChatId } = useSelector((state) => state.chatReducer);
-  useEffect(() => {
-    console.log(userAvatar);
-  }, []);
   return (
     <li
-      className={`sidebarChat ${activeChatId === id ? 'sidebarChat__active' : ''}`}
-      onClick={handleChooseChannel(id)}
+      className={`sidebarChat ${isActive ? 'sidebarChat__active' : ''}`}
+      onClick={handleChooseChannel}
     >
       {userAvatar ? <img src={`./svg/${userAvatar}`} alt="user-avatar" /> : <Avatar />}
       <div className="sidebarchat__info">
