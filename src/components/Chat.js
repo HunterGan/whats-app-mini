@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './Chat.css';
 import { ReactComponent as Avatar } from './svg/Avatar.svg';
 import { ReactComponent as Search } from './svg/Search.svg';
@@ -6,12 +7,20 @@ import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
 import { ReactComponent as Send } from './svg/Send.svg';
 import { ReactComponent as Clip } from './svg/Clip.svg';
+
 /// import { useSelector } from 'react-redux';
 
-const Chat = () => {
+const Chat = ({ id }) => {
   const [input, setInput] = useState('');
+  const fetchMessages = (x) => console.log(x);
+
   /// const { messages } = useSelector(state => state.messagesReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMessages(id));
+  }, [id, dispatch]);
   const activeChannel = 1;
+
   const messages = [
     {
       id: 1,

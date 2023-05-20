@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { actions as chatActions } from './chatSlice.js';
 
-const initialState = { messages: [] };
+const initialState = { messages: {} };
 
 const messagesSlice = createSlice({
   name: 'messages',
@@ -15,7 +15,7 @@ const messagesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(chatActions.setInitialState, (state, { payload }) => {
+    builder.addCase(chatActions.setActiveChat, (state, { payload }) => {
       console.log(state, payload);
       // const { messages } = payload;
       // state.messages = messages;

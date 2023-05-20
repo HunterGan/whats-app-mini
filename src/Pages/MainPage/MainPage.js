@@ -22,7 +22,7 @@ const MainPage = () => {
         dispatch(actions.setActiveChannel({ id: null }));
       }
     };
-    const fetchData = async () => {
+    const fetchContacts = async () => {
       try {
         const { data } = await axios.get(routes.getContacts(ID_INSTANCE, API_TOKEN_INSTANCE));
         console.log('got data: ', data);
@@ -32,7 +32,7 @@ const MainPage = () => {
       }
     };
     document.addEventListener('keydown', handleEsc);
-    fetchData();
+    fetchContacts();
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
@@ -40,7 +40,7 @@ const MainPage = () => {
   return (
     <>
       <Sidebar />
-      {activeChatId ? <Chat /> : (
+      {activeChatId ? <Chat id={activeChatId} /> : (
         <div className="chat__empty">
           <EmptyChatIcon />
           <p>WhatsApp Web</p>
