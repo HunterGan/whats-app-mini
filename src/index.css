@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
 }
+
 :root {
   --first-layout-bg-color: #D9E0E0;
   --second-layout-bg-color: #00A884;
@@ -19,6 +20,7 @@
   --clicked-color: #d5d5d5;
   --scrollbar-color: #CED0D1;
 }
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -31,10 +33,10 @@ body {
   place-items: center;
   height: 100vh;
   background: linear-gradient(to top,
-        var(--first-layout-bg-color) 0%,
-        var(--first-layout-bg-color) 87%,
-        var(--second-layout-bg-color) 87%,
-        var(--second-layout-bg-color) 100%);
+      var(--first-layout-bg-color) 0%,
+      var(--first-layout-bg-color) 87%,
+      var(--second-layout-bg-color) 87%,
+      var(--second-layout-bg-color) 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -50,6 +52,7 @@ body {
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
 }
+
 @media (max-width: 1600px) {
   .app_body {
     margin: 0;

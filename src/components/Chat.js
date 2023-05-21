@@ -7,19 +7,25 @@ import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
 import { ReactComponent as Send } from './svg/Send.svg';
 import { ReactComponent as Clip } from './svg/Clip.svg';
+import { getChatMessages } from '../api';
 
 /// import { useSelector } from 'react-redux';
 
 const Chat = ({ id }) => {
   const [input, setInput] = useState('');
-  const fetchMessages = (x) => console.log(x);
-
-  /// const { messages } = useSelector(state => state.messagesReducer);
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchMessages(id));
-  }, [id, dispatch]);
-  const activeChannel = 1;
+    const fetchChatMessages = async () => {
+      try {
+        const { data } = await getChatMessages(id);
+        console.log('CONSOLE.LOG Chat-data', data);
+      } catch (e) {
+        console.log('Error chat', e?.message);
+      }
+    };
+    fetchChatMessages();
+  }, [id]);
 
   const messages = [
     {
@@ -50,7 +56,7 @@ const Chat = ({ id }) => {
     // setInput(' ');
   };
 
-  return activeChannel && (
+  return (
     <div className="chat">
       <div className="chat_header">
         <Avatar cursor="pointer" />

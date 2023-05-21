@@ -11,9 +11,8 @@ import { actions } from '../slices/index.js';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  // const setActiveChannel = (id) => () => dispatch(actions.setActiveChannel(id));
-  const handleChooseChannel = (id) => () => {
-    dispatch(actions.setActiveChannel({ id }));
+  const handleChooseChat = (id) => () => {
+    dispatch(actions.setActiveChat({ id }));
   };
   const { chats, activeChatId } = useSelector((state) => state.chatReducer);
   return (
@@ -38,7 +37,7 @@ const Sidebar = () => {
             key={id}
             name={name}
             id={id}
-            handleChooseChannel={handleChooseChannel(id)}
+            handleChooseChannel={handleChooseChat(id)}
             isActive={activeChatId === id}
           />
         ))}
