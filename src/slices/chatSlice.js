@@ -10,7 +10,8 @@ const slice = createSlice({
   initialState,
   reducers: {
     setInitialState(state, { payload }) {
-      state.chats = payload;
+      const { chats } = payload;
+      state.chats = chats;
     },
     setActiveChat(state, { payload }) {
       const { id } = payload;

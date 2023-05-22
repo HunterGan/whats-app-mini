@@ -29,12 +29,30 @@ const getContacts = async () => {
 const getChatMessages = async (id) => {
   console.log('Trying async req getChatMessages');
   const data = await axios
-    .post(routes.getChatHistory(ID, API_TOKEN), { chatId: id, count: 100 }, config);
+    .post(routes.getChatHistory(ID, API_TOKEN), { chatId: id, count: 10 }, config);
+
   return data;
+};
+
+const getLastMessages = async () => {
+  console.log('Trying async req getChatMessages');
+  /// This endpoint returns only outoing messages... wtf?
+  // const data = await axios
+  //   .post(routes.getChatHistory(ID, API_TOKEN), { chatId: id, count: 10 }, config);
+  /// Thats why i'm going to download incoming and outcoming separate
+  const incoming = await axios
+    .get(routes.getLastIncomingMessages(ID, API_TOKEN), config);
+  const outcoming = await axios
+    .get(routes.getLastIncomingMessages(ID, API_TOKEN), config);
+  /// const lastMessages = Promise.all([incoming, outcoming]);
+  const lastMessages = [...incoming, ...outcoming];
+  console.log('Last messages are: ', lastMessages);
+  return lastMessages;
 };
 
 export {
   getStateInstance,
   getContacts,
   getChatMessages,
+  getLastMessages,
 };

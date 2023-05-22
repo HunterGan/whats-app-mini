@@ -13,7 +13,7 @@ import LoginPage from './LoginPage/LoginPage.js';
 const RequireAuth = () => {
   const auth = useAuth();
   return (
-    auth.user ? <Outlet /> : <Navigate to={routes.login} />
+    auth.user ? <Navigate to={routes.login} /> : <Outlet />
   );
 };
 

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import './MainPage.css';
 import Sidebar from '../../components/Sidebar.js';
 import Chat from '../../components/Chat.js';
-import { ReactComponent as EmptyChatIcon } from '../../components/svg/EmptyChatIcon.svg';
+import EmptyChatFiller from '../../components/EmptyChatFiller';
 import { actions } from '../../slices/index.js';
-import { getContacts } from '../../api/index.js';
+import { getContacts, getLastMessages } from '../../api/index.js';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -22,8 +21,10 @@ const MainPage = () => {
     const fetchContacts = async () => {
       try {
         const { data } = await getContacts();
+        const lastMessages = await getLastMessages();
+        console.log('Got last messages: ', !!lastMessages);
         console.log('CONSOLE.LOG MainPage getContacts ', data);
-        dispatch(actions.setInitialState(data));
+        dispatch(actions.setInitialState({ chats: data }));
       } catch (e) {
         console.log('ERRRRRRRRRRRRRRRRRR', { ...e });
       }
@@ -38,12 +39,13 @@ const MainPage = () => {
   return (
     <>
       <Sidebar />
-      {activeChatId ? <Chat id={activeChatId} /> : (
-        <div className="chat__empty">
-          <EmptyChatIcon />
-          <p>WhatsApp Web</p>
-        </div>
-      )}
+      {activeChatId
+        ? <Chat id={activeChatId} />
+        : (
+          <EmptyChatFiller>
+            <p>WhatsApp GreenApi</p>
+          </EmptyChatFiller>
+        )}
     </>
   );
 };
