@@ -7,7 +7,7 @@ import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
 import { ReactComponent as Send } from './svg/Send.svg';
 import { ReactComponent as Clip } from './svg/Clip.svg';
-import { getChatMessages } from '../api';
+import { getChatMessages, getContactInfo } from '../api';
 
 /// import { useSelector } from 'react-redux';
 
@@ -18,10 +18,12 @@ const Chat = ({ id }) => {
   useEffect(() => {
     const fetchChatMessages = async () => {
       try {
+        const contactInfo = await getContactInfo(id);
+        console.log('GOT contact info', contactInfo);
         const { data } = await getChatMessages(id);
-        console.log('CONSOLE.LOG Chat-data', data);
+        console.log('GOT Chat-data', data);
       } catch (e) {
-        console.log('Error chat', e?.message);
+        console.log('ERROR getting chat messages', e?.message);
       }
     };
     fetchChatMessages();

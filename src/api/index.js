@@ -34,6 +34,14 @@ const getChatMessages = async (id) => {
   return data;
 };
 
+const getContactInfo = async (id) => {
+  console.log('Trying async req getContactInfo');
+  const data = await axios
+    .post(routes.getContactInfo(ID, API_TOKEN), { chatId: id }, config);
+
+  return data;
+};
+
 const getLastMessages = async () => {
   console.log('Trying async req getChatMessages');
   /// This endpoint returns only outoing messages... wtf?
@@ -43,7 +51,7 @@ const getLastMessages = async () => {
   const incoming = await axios
     .get(routes.getLastIncomingMessages(ID, API_TOKEN), config);
   const outcoming = await axios
-    .get(routes.getLastIncomingMessages(ID, API_TOKEN), config);
+    .get(routes.getLastOutgoingMessages(ID, API_TOKEN), config);
   /// const lastMessages = Promise.all([incoming, outcoming]);
   const lastMessages = [...incoming, ...outcoming];
   console.log('Last messages are: ', lastMessages);
@@ -54,5 +62,6 @@ export {
   getStateInstance,
   getContacts,
   getChatMessages,
+  getContactInfo,
   getLastMessages,
 };
