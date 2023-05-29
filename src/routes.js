@@ -10,5 +10,6 @@ export default {
   getLastIncomingMessages: (id, token) => `${apiPath}${id}/lastIncomingMessages/${token}`,
   getLastOutgoingMessages: (id, token) => `${apiPath}${id}/LastOutgoingMessages/${token}`,
   getContactInfo: (id, token) => `${apiPath}${id}/getContactInfo/${token}`,
-
+  receiveNotification: (id, token) => `${apiPath}${id}/receiveNotification/${token}`,
+  deleteNotification: (id, token, receiptId) => `${apiPath}${id}/receiveNotification/${token}/${receiptId}`,
 };

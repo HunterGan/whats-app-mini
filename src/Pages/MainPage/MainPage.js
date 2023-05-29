@@ -6,10 +6,18 @@ import Chat from '../../components/Chat.js';
 import EmptyChatFiller from '../../components/EmptyChatFiller';
 import { actions } from '../../slices/index.js';
 import { getContacts } from '../../api/index.js';
+import { fetchMessages } from '../../slices/messagesSlice.js';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const { activeChatId } = useSelector((state) => state.chatReducer);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(fetchMessages());
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [dispatch]);
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -17,6 +25,7 @@ const MainPage = () => {
         dispatch(actions.setActiveChat({ id: null }));
       }
     };
+
     const fetchContacts = async () => {
       try {
         const { data } = await getContacts();
@@ -26,8 +35,10 @@ const MainPage = () => {
         console.log('ERROR getting contacts', e.message);
       }
     };
+
     document.addEventListener('keydown', handleEsc);
     fetchContacts();
+
     return () => {
       document.removeEventListener('keydown', handleEsc);
     };
