@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Chat.css';
 import { ReactComponent as Avatar } from './svg/Avatar.svg';
@@ -7,31 +7,31 @@ import { ReactComponent as MoreImg } from './svg/More.svg';
 import { ReactComponent as InsertEmoj } from './svg/InsertEmoj.svg';
 import { ReactComponent as Send } from './svg/Send.svg';
 import { ReactComponent as Clip } from './svg/Clip.svg';
-import { getChatMessages } from '../api';
 // eslint-disable-next-line no-unused-vars
 import { actions } from '../slices';
 /// import { actions } from '../slices';
 
 const Chat = ({ id }) => {
   const [input, setInput] = useState('');
-  const messages = useSelector((state) => state.messages);
-  console.log('messages are: ', messages);
+  // eslint-disable-next-line max-len
+  const messages = useSelector((state) => state.messagesReducer.messages.filter((message) => message.chatId === id));
+  console.log('messages are: ', messages, id);
   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchChatData = async () => {
-      try {
-        if (!messages[id]) {
-          const data = await getChatMessages(id);
-          console.log('Chat messages are:', data);
-          // dispatch(actions.addMessages(data))
-        }
-      } catch (e) {
-        console.log('ERROR getting chat messages', e?.message);
-      }
-    };
-    fetchChatData();
-  }, [id, messages]);
+  // useEffect(() => {
+  //   const fetchChatData = async () => {
+  //     try {
+  //       if (!messages[id]) {
+  //         const data = await getChatMessages(id);
+  //         console.log('Chat messages are:', data);
+  //         // dispatch(actions.addMessages(data))
+  //       }
+  //     } catch (e) {
+  //       console.log('ERROR getting chat messages', e?.message);
+  //     }
+  //   };
+  //   fetchChatData();
+  // }, [id, messages]);
 
   const messagess = [
     {

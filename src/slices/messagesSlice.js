@@ -1,15 +1,14 @@
 /* eslint-disable no-param-reassign */
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { actions as chatActions } from './chatSlice.js';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 import { receiveNotifications } from '../api/index.js';
 
-const initialState = { messages: {} };
+const initialState = { messages: [] };
 
 export const fetchMessages = createAsyncThunk(
   'messages/fetchMessages',
-  async () => {
-    console.log('Starting async Chunk');
+  async (_, { dispatch }) => {
+    console.log('Starting async Chunk - props', dispatch);
     try {
       const response = await receiveNotifications();
       const webhookBody = response && response.body;
@@ -18,15 +17,20 @@ export const fetchMessages = createAsyncThunk(
         console.log('show me message!!', response);
         const {
           idMessage, timestamp, messageData, senderData,
-        } = response.body;
-        const { chatId } = senderData;
-        const { text } = messageData.extendedTextMessageData;
+        } = webhookBody;
+        const { chatId, sender, chatName } = senderData;
+        const messageText = (messageData.typeMessage === 'reactionMessage')
+          ? messageData.extendedTextMessageData.text
+          : (messageData.typeMessage === 'textMessage ') && messageData.textMessageData.textMessage;
+        // if (response.receiptId) await deleteNotification(response.receiptId);
+        // if (messageText) {
+
+        // }
         return {
-          idMessage, timestamp, chatId, text,
+          idMessage, timestamp, chatId, sender, text: messageText,
         };
       }
       throw new Error();
-      // if (response.receiptId) await deleteNotification(response.receiptId);
     } catch (e) {
       throw new Error(e.message);
     }
@@ -38,29 +42,17 @@ const messagesSlice = createSlice({
   initialState,
   reducers: {
     addMessage(state, { payload }) {
-      console.log(state, payload);
+      console.log('ADDMESSAGE SLICE', state, payload);
       const message = payload;
-      state.messages[message.chatId].unshift(message);
+      state.messages.push(message);
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(chatActions.setActiveChat, (state, { payload }) => {
-      console.log(state, payload);
-      // const { messages } = payload;
-      // state.messages = messages;
-    })
-      .addCase(chatActions.setInitialState, (state, { payload }) => {
-        const { chats } = payload;
-        chats.forEach((chat) => {
-          state.messages[chat.id] = [];
-        });
-        // const { messages } = payload;
-        // state.messages = messages;
-      })
+    builder
       .addCase(fetchMessages.fulfilled, (state, action) => {
+        console.log('state is: ', current(state));
         const message = action.payload;
-        state.messages[message.chatId].unshift(message);
-        console.log('Action is: ', action);
+        state.messages.push(message);
       });
   },
 });

@@ -11,6 +11,7 @@ const slice = createSlice({
   reducers: {
     setInitialState(state, { payload }) {
       const { chats } = payload;
+      console.log('Chats are: ', chats);
       state.chats = chats;
     },
     setActiveChat(state, { payload }) {
